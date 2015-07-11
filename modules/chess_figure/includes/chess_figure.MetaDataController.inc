@@ -3,12 +3,12 @@ class ChessFigureMetaDataController extends EntityDefaultMetadataController{
   public function entityPropertyInfo(){
     $info = parent::entityPropertyInfo();
     $properties = &$info[$this->type]['properties'];
-    $properties['created'] = array(
+    $properties['create'] = array(
       'label' => t("Date created"),
       'type' => 'date',
       'description' => t("The date the figure was created."),
       'setter callback' => 'entity_property_verbatim_set',
-      'schema field' => 'created',
+      'schema field' => 'create',
     );
     $properties['type'] = array(
         'type' => 'varchar',
@@ -18,10 +18,10 @@ class ChessFigureMetaDataController extends EntityDefaultMetadataController{
         'description' => t('The chess figure type.'),
       ) + $properties['type'];
 
-    $properties['changed'] = array(
+    $properties['change'] = array(
       'label' => t("Date changed"),
       'type' => 'date',
-      'schema field' => 'changed',
+      'schema field' => 'change',
       'description' => t("The date the figure was most recently updated."),
     );
     $properties['cell_x'] = array(

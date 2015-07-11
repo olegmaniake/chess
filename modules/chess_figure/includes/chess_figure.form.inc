@@ -30,7 +30,6 @@ function chess_figure_type_form($form, &$form_state, $chess_type, $op = 'create'
       '#size' => 60,
       '#default_value' => isset($chess_type -> description) ? $chess_type -> description : '',
       '#maxlength' => 1000,
-      '#required' => TRUE,
     );
     $form['actions'] = array('#type' => 'actions');
     $form['actions']['submit'] = array(

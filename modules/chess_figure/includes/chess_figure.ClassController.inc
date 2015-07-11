@@ -5,18 +5,22 @@ class ChessFigureController extends EntityAPIController{
   }
 
   public function create(array $values = array()){
-  $values +=array(
-    'fid' => '',
-    'is_new' => TRUE,
-    'title' => '',
-    'create' =>'',
-    'changed' =>'',
-    'cell_x' =>0,
-    'cell_y'=>0,
-  );
-  $chess_figure = parent::create($values);
-    return $chess_figure;}
+    global $user;
+    $values += array(
+      'fid' => '',
+      'create' => REQUEST_TIME,
+      'change' => REQUEST_TIME,
+      'cell_x' => 0,
+      'cell_y' => 0,
+      'uid' => $user->uid,
+    );
+
+    $chess_figure = parent::create($values);
+
+    return $chess_figure;
+  }
 }
+
 class ChessFigureTypeController extends EntityAPIControllerExportable{
   public function __construct($type){
     parent::__construct($type);
