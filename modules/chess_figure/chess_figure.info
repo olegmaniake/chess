@@ -1,0 +1,14 @@
+name = Chess figure
+description = The module that necessary of module chess
+package = GAME
+core = 7.x
+
+dependencies[] = entity
+
+files[] = chess_figure.install
+files[] = chess_figure.module
+
+file[] = includes/chess_figure.admin.inc
+file[] = includes/chess_figure.class.inc
+file[] = includes/chess_figure.ClassController.inc
+file[] = includes/entity_info.chess_figure.inc
