@@ -8,8 +8,8 @@ class ChessFigureController extends EntityAPIController{
     global $user;
     $values += array(
       'fid' => '',
-      'create' => REQUEST_TIME,
-      'change' => REQUEST_TIME,
+      'created' => REQUEST_TIME,
+      'changed' => REQUEST_TIME,
       'cell_x' => 0,
       'cell_y' => 0,
       'uid' => $user->uid,

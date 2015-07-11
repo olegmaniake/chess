@@ -28,12 +28,12 @@ function chess_figure_schema() {
         'not null' => TRUE,
         'default' => '',
       ),
-      'create' => array(
+      'created' => array(
         'description' => 'The timestump when chess figure was create.',
         'type' => 'int',
         'not null' => TRUE,
       ),
-      'change' => array(
+      'changed' => array(
         'description' => 'The timestump when ches figure was modified.',
         'type' => 'int',
         'not null' => FALSE,
