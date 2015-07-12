@@ -2,7 +2,7 @@
 /**
  *
  */
-function chess_figure_install(){
+function chess_figure_install() {
   $types = array(
     'pawn' => 'can walk straight fight carries diagonally course carries one cell.',
     'castle' => "The castle can move any number of squares along any rank or file, but may not leap over other pieces. Along with the king, the castle is involved during the king's castling move.",
@@ -11,16 +11,17 @@ function chess_figure_install(){
     'queen' => 'The queen combines the power of the rook and bishop and can move any number of squares along rank, file, or diagonal, but it may not leap over other pieces.',
     'king' => 'The king moves one square in any direction. The king has also a special move which is called castling and involves also moving a castle.',
   );
-  foreach ($types as $type => $description){
-   $ftid = db_insert('chess_figure_type')
-      ->fields(array(
+  if (!drupal_installation_attempted()) {
+    foreach ($types as $type => $description) {
+      $type = entity_create('chess_figure_type', array(
         'type' => $type,
-        'label'=> $type,
+        'label' => $type,
         'description' => $description,
-        ))
-      ->execute();
-  }
+      ));
+      $type->save();
 
+    }
+  }
 }
 
 /**
