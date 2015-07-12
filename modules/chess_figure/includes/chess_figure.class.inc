@@ -1,11 +1,9 @@
 <?php 
 class ChessFigure extends Entity {
   public function __construct ($values =array()){
-<<<<<<< HEAD
-    parent::__construct($values,'chess_figure');
-=======
+
     parent::__construct($values, 'chess_figure');
->>>>>>> kyvour
+
   }
   protected function defaultLabel(){
     return $this->type;
