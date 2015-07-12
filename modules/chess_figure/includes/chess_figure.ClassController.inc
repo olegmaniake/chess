@@ -5,6 +5,7 @@ class ChessFigureController extends EntityAPIController{
   }
 
   public function create(array $values = array()){
+<<<<<<< HEAD
   $values +=array(
     'fid' => '',
     'is_new' => TRUE,
@@ -16,7 +17,24 @@ class ChessFigureController extends EntityAPIController{
   );
   $chess_figure = parent::create($values);
     return $chess_figure;}
+=======
+    global $user;
+    $values += array(
+      'fid' => '',
+      'created' => REQUEST_TIME,
+      'changed' => REQUEST_TIME,
+      'cell_x' => 0,
+      'cell_y' => 0,
+      'uid' => $user->uid,
+    );
+
+    $chess_figure = parent::create($values);
+
+    return $chess_figure;
+  }
+>>>>>>> kyvour
 }
+
 class ChessFigureTypeController extends EntityAPIControllerExportable{
   public function __construct($type){
     parent::__construct($type);
@@ -43,7 +61,7 @@ class ChessFigureUIController extends EntityDefaultUIController{
       'file path' => drupal_get_path('module', 'system'),
       'file' => 'system.admin.inc',
     );
-    $items[$this->path]['description'] = 'manege chess figures types.';
+    $items[$this->path]['description'] = 'manege chess figures.';
     $items[$this->path]['type'] = MENU_LOCAL_TASK;
     $items[$this->path.'/add'] = array(
       'title' => 'add a figure',

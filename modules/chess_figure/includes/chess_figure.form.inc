@@ -12,7 +12,7 @@ function chess_figure_type_form($form, &$form_state, $chess_type, $op = 'create'
       '#type' => 'textfield',
       '#title' => t('Type'),
       '#size' => 60,
-      '#default_value' => isset($chess_type -> type) ? $chess_type -> type : '' ,
+      '#default_value' => (isset($chess_type -> type) ? $chess_type -> type : '') ,
       '#maxlength' => 128,
       '#required' => TRUE,
     );
@@ -20,7 +20,7 @@ function chess_figure_type_form($form, &$form_state, $chess_type, $op = 'create'
       '#type' => 'textfield',
       '#title' => t('Label'),
       '#size' => 60,
-      '#default_value' => isset($chess_type -> label) ? $chess_type -> label : '',
+      '#default_value' => (isset($chess_type -> label) ? $chess_type -> label : ''),
       '#maxlength' => 128,
       '#required' => TRUE,
     );
@@ -28,9 +28,8 @@ function chess_figure_type_form($form, &$form_state, $chess_type, $op = 'create'
       '#type' => 'textfield',
       '#title' => t('description'),
       '#size' => 60,
-      '#default_value' => isset($chess_type -> description) ? $chess_type -> description : '',
+      '#default_value' => (isset($chess_type -> description) ? $chess_type -> description : ''),
       '#maxlength' => 1000,
-      '#required' => TRUE,
     );
     $form['actions'] = array('#type' => 'actions');
     $form['actions']['submit'] = array(

@@ -1,13 +1,21 @@
 <?php 
 class ChessFigure extends Entity {
   public function __construct ($values =array()){
+<<<<<<< HEAD
     parent::__construct($values,'chess_figure');
+=======
+    parent::__construct($values, 'chess_figure');
+>>>>>>> kyvour
   }
   protected function defaultLabel(){
-    return $this -> type;
+    return $this->type;
   }
   protected function defaultUri(){
     return array('path' => 'chess/figure/'.$this->id);
+  }
+
+  public function save() {
+    return parent::save();
   }
 }
 class ChessFigureType extends Entity{
@@ -16,5 +24,8 @@ class ChessFigureType extends Entity{
 
   public function __construct($values = array()){
     parent::__construct($values,'chess_figure_type')  ;
+  }
+  protected function defaultUri(){
+    return array('path' => 'chess/figure/'.$this->type);
   }
 }

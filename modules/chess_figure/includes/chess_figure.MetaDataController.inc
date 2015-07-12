@@ -10,13 +10,6 @@ class ChessFigureMetaDataController extends EntityDefaultMetadataController{
       'setter callback' => 'entity_property_verbatim_set',
       'schema field' => 'created',
     );
-    $properties['type'] = array(
-        'type' => 'varchar',
-        'getter callback' => 'entity_property_getter_method',
-        'setter callback' => 'entity_property_verbatim_set',
-        'required' => TRUE,
-        'description' => t('The chess figure type.'),
-      ) + $properties['type'];
 
     $properties['changed'] = array(
       'label' => t("Date changed"),
@@ -24,6 +17,7 @@ class ChessFigureMetaDataController extends EntityDefaultMetadataController{
       'schema field' => 'changed',
       'description' => t("The date the figure was most recently updated."),
     );
+<<<<<<< HEAD
     $properties['cell_x'] = array(
       'label' => t("x"),
       'type' => 'int',
@@ -42,6 +36,9 @@ class ChessFigureMetaDataController extends EntityDefaultMetadataController{
       'schema field' => 'cell_y',
       'description' => t("The cell y the figure was most recently updated."),
     );
+=======
+
+>>>>>>> kyvour
 
 
 return $properties;

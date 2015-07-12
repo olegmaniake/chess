@@ -12,6 +12,7 @@ function chess_figure_entity_info() {
     'metadata controller class' => 'ChessFigureMetadataController',
     'base table' => 'chess_figure',
     'fieldable' => TRUE,
+    'statusKey' => NULL,
     'translation' => array(
       'entity_translation' => array(
         'class' => 'EntityTranslationDefaultHandler',
@@ -26,8 +27,6 @@ function chess_figure_entity_info() {
     'load hook' => 'chess_figure_load',
     'uri callback' => 'chess_figure_uri',
     'access callback' => 'chess_figure_access',
-    'static cache' => FALSE,
-    'field cache' => FALSE,
     'module' => 'chess_figure',
     'bundle keys' => array(
       'bundle' => 'type',
@@ -38,19 +37,7 @@ function chess_figure_entity_info() {
         'custom settings' => TRUE,
       ),
     ),
-    'bundles' => array(
-      'chess_figure' => array(
-        'label' => t('Default chess figure'),
-        // Человеко-понятное название типа.
-        'admin' => array(
-          'path' => 'admin/structure/chess/figure/1',
-          // Путь, по которому доступна админка.
-          'access arguments' => array('administer chess figure'),
-          // Права доступа в админку.
-          'real path' => 'admin/structure/chess/figure/1',
-        ),
-      ),
-    ),
+    'bundles' => array(),
   );
 
   $types = db_select('chess_figure', 'c')
@@ -66,7 +53,7 @@ function chess_figure_entity_info() {
         //шлях за яким буде доступна наша сутність
         'real path' => 'admin/structure/chess/figure/' . $type,
         // реальний шлях до сутності
-        'bundle argument' => 3,
+        'bundle argument' => 4,
         //аргумент в якому передаеться тип сутності
         'access arguments' => array('administer chess figure'),
         //аргумент доступу до підтипу

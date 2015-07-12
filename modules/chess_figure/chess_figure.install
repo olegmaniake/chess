@@ -1,85 +1,95 @@
 <?php
+/**
+ *
+ */
+function chess_figure_install(){
+  $types = array(
+    'pawn' => 'can walk straight fight carries diagonally course carries one cell.',
+    'castle' => "The castle can move any number of squares along any rank or file, but may not leap over other pieces. Along with the king, the castle is involved during the king's castling move.",
+    'knight' => 'The knight moves to any of the closest squares that are not on the same rank, file, or diagonal, thus the move forms an "L"-shape: two squares vertically and one square horizontally, or two squares horizontally and one square vertically. The knight is the only piece that can leap over other pieces.',
+    'bishop' => 'The bishop can move any number of squares diagonally, but may not leap over other pieces.',
+    'queen' => 'The queen combines the power of the rook and bishop and can move any number of squares along rank, file, or diagonal, but it may not leap over other pieces.',
+    'king' => 'The king moves one square in any direction. The king has also a special move which is called castling and involves also moving a castle.',
+  );
+  foreach ($types as $type => $description){
+   $ftid = db_insert('chess_figure_type')
+      ->fields(array(
+        'type' => $type,
+        'label'=> $type,
+        'description' => $description,
+        ))
+      ->execute();
+  }
+
+}
 
 /**
  * @return mixed
  */
-function chess_figure_schema(){
-    $schema['chess_figure'] = array(
-      'description' => 'The base table for chess figure.',
+function chess_figure_schema() {
+  $schema['chess_figure'] = array(
+    'description' => 'The base table for chess figure.',
+    'fields' => array(
 
-      'fields' => array(
-
-        'fid' => array(
-          'description' => 'The primary identifier for chess figure',
-          'type' => 'serial',
-          'unsigned' => TRUE,
-          'not null' => TRUE,
-        ),
-
-        'type' => array(
-          'description' => 'The type of chess figure.',
-          'type' => 'varchar',
-          'length' => 10,
-          'not null' => TRUE,
-          'default' => '',
-        ),
-
-        'color' => array(
-          'description' => 'The color of chess figure.',
-          'type' => 'varchar',
-          'length' => 32,
-          'not null' => TRUE,
-          'default' => '',
-        ),
-
-        'create' => array(
-          'description' => 'The timestump when chess figure was create.',
-          'type' => 'int',
-          'not null' => TRUE,
-        ),
-
-        'change' => array(
-          'description' => 'The timestump when ches figure was modified.',
-          'type' => 'int',
-          'not null' =>FALSE,
-        ),
-
-        'cell_x' => array(
-          'description' => 'The x coordinate of cell for figure.',
-          'type' => 'int',
-          'not null' =>TRUE,
-          'default' =>0,
-        ),
-
-        'cell_y' => array(
-          'description' => 'The y coordinate of cell for figure.',
-          'type' => 'int',
-          'not null' =>TRUE,
-          'default' =>0,
-        ),
-
-        'uid' => array(
-          'type' => 'int',
-          'not null' => TRUE,
-          'default' => 0,
-          'description' => "The {users}.uid who create this figure.",
-        ),
+      'fid' => array(
+        'description' => 'The primary identifier for chess figure',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
       ),
-
-
-      'indexes' => array(
-        'uid' => array('uid'),
-        'type' =>array('type'),
+      'type' => array(
+        'description' => 'The type of chess figure.',
+        'type' => 'varchar',
+        'length' => 10,
+        'not null' => TRUE,
+        'default' => '',
       ),
-
-
-      'primary key' => array('fid'),
-    );
+      'color' => array(
+        'description' => 'The color of chess figure.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'created' => array(
+        'description' => 'The timestump when chess figure was create.',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'changed' => array(
+        'description' => 'The timestump when ches figure was modified.',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'cell_x' => array(
+        'description' => 'The x coordinate of cell for figure.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'cell_y' => array(
+        'description' => 'The y coordinate of cell for figure.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'uid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "The {users}.uid who create this figure.",
+      ),
+    ),
+    'indexes' => array(
+      'uid' => array('uid'),
+      'type' => array('type'),
+    ),
+    'primary key' => array('fid'),
+  );
 
 
   $schema['chess_figure_type'] = array(
     'description' => 'The base table for game type',
-
     'fields' => array(
 
       'tid' => array(
@@ -87,7 +97,6 @@ function chess_figure_schema(){
         'type' => 'serial',
         'not null' => TRUE,
       ),
-
       'type' => array(
         'description' => ' The machine-readable of chess game.',
         'type' => 'varchar',
@@ -95,7 +104,6 @@ function chess_figure_schema(){
         'not null' => TRUE,
         'default' => '',
       ),
-
       'label' => array(
         'description' => 'The human-readable type of chass game.',
         'type' => 'varchar',
@@ -110,12 +118,10 @@ function chess_figure_schema(){
 
       ),
     ),
-
     'indexes' => array(
       'type' => array('type'),
 
     ),
-
     'primary key' => array('tid'),
 
   );

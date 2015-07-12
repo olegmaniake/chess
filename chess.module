@@ -48,11 +48,9 @@ function chess_new_game_form_submit($form,&$form_state){
     'color'=> 'black',
     'cell_x' => 1,
     'cell_y' => 1,
-    'create' => time(),
   );
-  $figure = new ChessFigureController('chess_figure');
-   $chess_fig=$figure->create($values);
-  $chess_fig->save();
+  $figure = entity_get_controller('chess_figure')->create($values);
+  $figure->save();
   $form_state['redirect'] = 'chess/game';
 
 }
