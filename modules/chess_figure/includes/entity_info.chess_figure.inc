@@ -37,19 +37,7 @@ function chess_figure_entity_info() {
         'custom settings' => TRUE,
       ),
     ),
-    'bundles' => array(
-      'chess_figure' => array(
-        'label' => t('Default chess figure'),
-        // Человеко-понятное название типа.
-        'admin' => array(
-          'path' => 'admin/structure/chess/figure/1',
-          // Путь, по которому доступна админка.
-          'access arguments' => array('administer chess figure'),
-          // Права доступа в админку.
-          'real path' => 'admin/structure/chess/figure/1',
-        ),
-      ),
-    ),
+    'bundles' => array(),
   );
 
   $types = db_select('chess_figure', 'c')

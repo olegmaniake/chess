@@ -47,7 +47,7 @@ class ChessFigureUIController extends EntityDefaultUIController{
       'file path' => drupal_get_path('module', 'system'),
       'file' => 'system.admin.inc',
     );
-    $items[$this->path]['description'] = 'manege chess figures types.';
+    $items[$this->path]['description'] = 'manege chess figures.';
     $items[$this->path]['type'] = MENU_LOCAL_TASK;
     $items[$this->path.'/add'] = array(
       'title' => 'add a figure',

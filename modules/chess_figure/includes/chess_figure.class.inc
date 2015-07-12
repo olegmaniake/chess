@@ -21,4 +21,7 @@ class ChessFigureType extends Entity{
   public function __construct($values = array()){
     parent::__construct($values,'chess_figure_type')  ;
   }
+  protected function defaultUri(){
+    return array('path' => 'chess/figure/'.$this->type);
+  }
 }
