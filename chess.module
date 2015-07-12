@@ -39,10 +39,10 @@ function chess_new_game_form($form,$form_state){
     '#weigth' => 50,
     '#value' => t('Create new game'),
   );
-  $form['#submit'] = array('chess_new_game_submit');
+  $form['#submit'] = array('chess_new_game_form_submit');
   return $form;
 }
-function chess_new_game_submit($form,&$form_state){
+function chess_new_game_form_submit($form,&$form_state){
   $values = array(
     'type' => $form_state['values']['chess_figure'],
     'color'=> 'black',

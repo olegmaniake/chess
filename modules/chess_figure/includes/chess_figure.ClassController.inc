@@ -9,8 +9,8 @@ class ChessFigureController extends EntityAPIController{
     'fid' => '',
     'is_new' => TRUE,
     'title' => '',
-    'create' =>'',
-    'changed' =>'',
+    'create' =>0,
+    'changed' =>0,
     'cell_x' =>0,
     'cell_y'=>0,
   );

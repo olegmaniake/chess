@@ -27,7 +27,7 @@ class ChessFigureMetaDataController extends EntityDefaultMetadataController{
     $properties['cell_x'] = array(
       'label' => t("x"),
       'type' => 'int',
-      'schema field' => 'cell',
+      'schema field' => 'cell_x',
       'description' => t("The cell x the figure was most recently updated."),
     );
     $properties['color'] = array(
@@ -39,7 +39,7 @@ class ChessFigureMetaDataController extends EntityDefaultMetadataController{
     $properties['cell_y'] = array(
       'label' => t("y"),
       'type' => 'int',
-      'schema field' => 'cell',
+      'schema field' => 'cell_y',
       'description' => t("The cell y the figure was most recently updated."),
     );
 
