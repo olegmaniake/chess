@@ -1,45 +1,21 @@
 <?php
-module_load_include('inc','chess_figure','includes/entity_info.chess_figure');
-module_load_include('inc','chess_figure','includes/chess_figure.admin');
-module_load_include('inc','chess_figure','includes/chess_figure.class');
-module_load_include('inc','chess_figure','includes/chess_figure.ClassController');
-module_load_include('inc','chess_figure','includes/chess_figure.MetaDataController');
-module_load_include('inc','chess_figure','includes/chess_figure.form');
+module_load_include('inc','chess_figure','includes/classes/ChessFigure');
+module_load_include('inc','chess_figure','includes/classes/ChessFigureController');
+module_load_include('inc','chess_figure','includes/classes/ChessFigureMetaDataController');
 
-function chess_figure_access($op,$chess_figure=null,$user){
-  global $user;
+module_load_include('inc','chess_figure','includes/classes/ChessFigureType');
+module_load_include('inc','chess_figure','includes/classes/ChessFigureTypeController');
+module_load_include('inc','chess_figure','includes/classes/ChessFigureTypeMetaDataController');
 
-  if (user_access('admin chess figure', $user)){
-    return true;
-  }
+module_load_include('inc','chess_figure','includes/classes/ChessFigureUI');
 
-  $uuid = $user->uid;
-  if ($op == 'create' && $uuid != 0){
-    return TRUE;
-  }
-  if (user_access('admin own chess figure') && $uuid == $chess_figure->uid){
-    return TRUE;
-  }
+module_load_include('inc','chess_figure','includes/classes/ChessFigureTypeUI');
 
-  return FALSE;
-}
+module_load_include('inc','chess_figure','includes/forms/chessFigureForm');
+module_load_include('inc','chess_figure','includes/forms/chessFigureTypeForm');
 
+module_load_include('inc','chess_figure','includes/hooks/entityInfo');
+module_load_include('inc','chess_figure','includes/hooks/permission');
+module_load_include('inc','chess_figure','includes/hooks/menu');
 
-
-/**
- *  Implements hook_permission().
- */
-function chess_figure_permission() {
-  return array(
-    'administer chess figure' => array(
-      'title' => t('administer chess figure'),
-      'description' => t('administer chess figure.'),
-      'restrict access' => FALSE,
-    ),
-    'administer own chess figure' => array(
-      'title' => t('administer own chess figure'),
-      'description' => t('administer own chess figure.'),
-      'restrict access' => TRUE,
-    ),
-  );
-}
+module_load_include('inc','chess_figure','includes/chessFigureFunction');

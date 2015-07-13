@@ -32,8 +32,12 @@ function chess_figure_entity_info() {
       'bundle' => 'type',
     ),
     'view modes' => array(
-      'default' => array(
-        'label' => t('default'),
+      'description' => array(
+        'label' => t('Description'),
+        'custom settings' => TRUE,
+      ),
+      'on_board' => array(
+        'label' => t('On board'),
         'custom settings' => TRUE,
       ),
     ),

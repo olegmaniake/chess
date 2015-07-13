@@ -2,7 +2,9 @@
 class ChessFigureMetaDataController extends EntityDefaultMetadataController{
   public function entityPropertyInfo(){
     $info = parent::entityPropertyInfo();
+
     $properties = &$info[$this->type]['properties'];
+
     $properties['created'] = array(
       'label' => t("Date created"),
       'type' => 'date',
@@ -18,21 +20,6 @@ class ChessFigureMetaDataController extends EntityDefaultMetadataController{
       'description' => t("The date the figure was most recently updated."),
     );
 
-
-return $properties;
-
-  }
-}
-class ChessFigureTypeMetaDataController extends EntityDefaultMetadataController{
-  public function entityPropertyInfo() {
-    $info = parent::entityPropertyInfo();
-    $properties = &$info[$this->type]['properties'];
-    $properties['description'] = array(
-      'label' => t("Description"),
-      'type' => 'varchar',
-      'schema field' => 'description',
-      'description' => t("The description of chess figure."),
-    );
     return $properties;
   }
 }

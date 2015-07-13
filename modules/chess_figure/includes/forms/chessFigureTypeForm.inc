@@ -1,12 +1,14 @@
 <?php
-function chess_figure_type_form($form, &$form_state, $chess_type, $op = 'create'){
+
+function chess_figure_new_type_form($form, &$form_state, $chess_type, $op = 'create'){
   if ($op == 'delete'){
     $form['submit']=array(
       '#type' => 'submit',
       '#weigth' => 50,
       '#value' => t('Delete '.$chess_type->label),
     );
-    } else {
+
+  } else {
 
     $form['type']=array(
       '#type' => 'textfield',
@@ -16,6 +18,7 @@ function chess_figure_type_form($form, &$form_state, $chess_type, $op = 'create'
       '#maxlength' => 128,
       '#required' => TRUE,
     );
+
     $form['label']=array(
       '#type' => 'textfield',
       '#title' => t('Label'),
@@ -24,6 +27,7 @@ function chess_figure_type_form($form, &$form_state, $chess_type, $op = 'create'
       '#maxlength' => 128,
       '#required' => TRUE,
     );
+
     $form['description']=array(
       '#type' => 'textfield',
       '#title' => t('description'),
@@ -31,6 +35,7 @@ function chess_figure_type_form($form, &$form_state, $chess_type, $op = 'create'
       '#default_value' => (isset($chess_type -> description) ? $chess_type -> description : ''),
       '#maxlength' => 1000,
     );
+
     $form['actions'] = array('#type' => 'actions');
     $form['actions']['submit'] = array(
       '#type' => 'submit',
@@ -38,9 +43,10 @@ function chess_figure_type_form($form, &$form_state, $chess_type, $op = 'create'
       '#weight' => 40,
     );
   }
-return $form;
+  return $form;
 }
-function chess_figure_type_form_submit(&$form, &$form_state) {
+
+function chess_figure_new_type_form_submit(&$form, &$form_state) {
   $model_type = entity_ui_form_submit_build_entity($form, $form_state);
   $model_type->save();
   $form_state['redirect'] = 'admin/structure/chess/figure/type';
