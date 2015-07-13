@@ -1,7 +1,0 @@
-name = Chess
-description = "The module what create game chess ."
-core = 7.x
-package = GAME
-
-; Зависимости ставляться тільки тоді, коли ти використовуєш якийсь функціонал із цих модулів
-dependencies[] = chess_figuregit
