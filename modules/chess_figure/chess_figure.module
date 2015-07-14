@@ -50,7 +50,7 @@ function chess_figure_entity_info() {
     'bundles' => array(),
   );
 
-  $types = db_select('chess_figure', 'c')
+  $types = db_select('chess_figure_type', 'c')
     ->fields('c')
     ->execute()
     ->fetchAllAssoc('type');
@@ -133,6 +133,7 @@ function chess_figure_menu(){
   $items['chess/figure/%'] = array(
     'title'=>'',
     'page callback' => 'chess_figure_on_board',
+    'page arguments' => array(2),
     'access callback' => 'user_is_logged_in',
     'type' => MENU_NORMAL_ITEM,
   );
@@ -146,8 +147,8 @@ function chess_figure_menu(){
  */
 function chess_figure_theme() {
   return array(
-    'chess_figure' => array(
-      'template' => 'theme/chess_figure',
+    'chess_figure_template' => array(
+      'template' => 'includes/themes/chess_figure',
       'variables' => array(
         'cell' => NULL,
         'color' => NULL,
@@ -158,14 +159,15 @@ function chess_figure_theme() {
 }
 
 function chess_figure_on_board($id){
-  $chess_figure = chess_figure_load($id);
+  $chess_figure = chess_figure_load($id)[$id];
+
 
   $values = array(
     'cell' => ('' . $chess_figure->cell_x . $chess_figure->cell_y),
     'color' => $chess_figure -> color,
     'type' => $chess_figure -> type,
   );
-  return theme('theme/chess_figure',$values);
+  return theme('chess_figure_template',$values);
 }
 
 

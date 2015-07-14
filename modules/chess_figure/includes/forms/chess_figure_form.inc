@@ -33,6 +33,7 @@ function chess_figure_form(){
 function chess_figure_form_submit($form,&$form_state){
   $values = array(
     'type' => $form_state['values']['chess_figure'],
+    'color' => $form_state['values']['color'],
     'cell_x' => 1,
     'cell_y' => 1,
   );
