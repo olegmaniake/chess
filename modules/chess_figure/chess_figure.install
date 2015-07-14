@@ -19,7 +19,6 @@ function chess_figure_install() {
         'description' => $description,
       ));
       $type->save();
-
     }
   }
 }

@@ -16,4 +16,6 @@ class ChessFigure extends Entity {
   public function save() {
     return parent::save();
   }
+
+
 }

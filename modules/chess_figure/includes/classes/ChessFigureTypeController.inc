@@ -6,7 +6,7 @@ class ChessFigureTypeController extends EntityAPIControllerExportable{
 
   public function create(array $values = array()){
     $values += array(
-      'id'=>'',
+      'tid'=>'',
       'is_new'=>TRUE,
       'description'=>'',
     );
@@ -14,4 +14,3 @@ class ChessFigureTypeController extends EntityAPIControllerExportable{
     return $chess_type;
   }
 }
-
