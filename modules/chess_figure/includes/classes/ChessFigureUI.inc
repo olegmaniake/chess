@@ -12,17 +12,6 @@ class ChessFigureUIController extends EntityDefaultUIController{
       'file' => 'system.admin.inc',
       'type' =>MENU_LOCAL_TASK,
     );
-
-    $items[$this->path.'/add'] = array(
-      'title' => 'add a figure',
-      'page callback' => 'chess_figure_type_form',
-      'access callback' => 'chess_figure_access',
-      'access arguments' => (array('admin own chess figure')),
-      'type' => MENU_NORMAL_ITEM,
-      'file' => 'chess_figure_ClassController.inc',
-      'file path' => drupal_get_path('chess_figure', $this->entityInfo['chess_figure']),
-    );
-
     return $items;
   }
 }

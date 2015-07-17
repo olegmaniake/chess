@@ -16,3 +16,5 @@ files[] = includes/classes/ChessFigureTypeMetaDataController.inc
 files[] = includes/classes/ChessFigureUI.inc
 
 files[] = includes/classes/ChessFigureTypeUI.inc
+
+files[] = includes/classes/ChessFigureViewsController.inc

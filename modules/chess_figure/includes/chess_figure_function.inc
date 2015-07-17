@@ -72,8 +72,24 @@ function chess_figure_access($op,$chess_figure=null,$user){
 
 function chess_figure_uri($figure){
   if (is_object($figure)){
-    $id = (isset($figure->fid) ? $figure->fid : $figure->label);
-  return array(
-    'path' => 'chess/figure/'.$id,
-  );}
+    $id = (isset($figure->fid) ? $figure->fid : '');
+    return array(
+      'path' => 'chess-figure/'.$id,
+    );
+  } else {
+    return array(
+      'path' => 'chess-figure/'.$figure,
+    );
+  }
+}
+function chess_figure_type_uri($type){
+  if (is_object($type)){
+    return array(
+      'path' => 'chess-figure/type/%'.$type->type,
+    );
+  } else {
+    return array(
+      'path' => 'chess-figure/type/%'.$type,
+    );
+  }
 }
