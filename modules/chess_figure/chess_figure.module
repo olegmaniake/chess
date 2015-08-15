@@ -237,3 +237,22 @@ function chess_figure_menu_local_tasks_alter(&$data, $router_item, $root_path) {
     }
   }
 }
+
+/**
+ * Implements hook_admin_paths().
+ */
+function chess_figure_admin_paths() {
+  $path = array(
+    'chess-figure/*/edit' => TRUE,
+    'chess-figure/*/delete' => TRUE,
+    'chess-figure/add' =>TRUE,
+    );
+
+}
+
+function chess_figure_views_api(){
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'chess_figure') . '/views',
+  );
+}

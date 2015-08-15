@@ -5,17 +5,6 @@ class ChessFigureUIController extends EntityDefaultUIController {
     $id_count = count(explode('/', $this->path));
     $wildcard = isset($this->entityInfo['admin ui']['menu wildcard']) ? $this->entityInfo['admin ui']['menu wildcard'] : '%' . $this->entityType;
 
-    $items[$this->path] = array(
-      'title' => 'Figures',
-      'description' => 'add, edit and update chess figures',
-      'page callback' => 'system_admin_menu_block_page',
-      'access argument' => array('administer chess'),
-      'access callback' => 'chess_figure_access' ,
-      'file path' => drupal_get_path('module', 'system'),
-      'file' => 'system.admin.inc',
-      'type' => MENU_LOCAL_TASK,
-    );
-
     $items[$this->path . '/add'] = array(
       'title' => 'Add a chess figure',
       'description' => 'Add a new figure',
@@ -29,7 +18,7 @@ class ChessFigureUIController extends EntityDefaultUIController {
       'file path' => drupal_get_path('module', $this->entityInfo['module']),
     );
 
-    $items[$this->path . '/chess-figure/' . $wildcard] = array(
+    $items[$this->path . '/' . $wildcard] = array(
       'page callback' => 'chess_figure_form_wrapper',
       'page arguments' => array($id_count + 1),
       'access callback' => 'chess_figure_access',
@@ -40,14 +29,14 @@ class ChessFigureUIController extends EntityDefaultUIController {
       'file path' => drupal_get_path('module', $this->entityInfo['module']),
     );
 
-    $items[$this->path . '/chess-figure/' . $wildcard . '/edit'] =array(
+    $items[$this->path . '/' . $wildcard . '/edit'] =array(
       'title' => 'Edit',
       'type' => MENU_DEFAULT_LOCAL_TASK,
       'weight' => -10,
       'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
     );
 
-    $items[$this->path . '/chess_figure/' . $wildcard . '/delete'] = array(
+    $items[$this->path . '/' . $wildcard . '/delete'] = array(
       'title' => 'Delete',
       'page callback' => 'chess_figure_delete_form_wrapper',
       'page arguments' => array($id_count + 1),
@@ -66,6 +55,9 @@ class ChessFigureUIController extends EntityDefaultUIController {
       'access callback' => 'user_is_logged_in',
       'type' => MENU_CALLBACK,
     );
+
+
+
 
     return $items;
   }
