@@ -5,16 +5,13 @@ core = 7.x
 
 dependencies[] = entity
 
-files[] = includes/classes/ChessFigure.inc
-files[] = includes/classes/ChessFigureController.inc
-files[] = includes/classes/ChessFigureMetaDataController.inc
+files[] = classes/ChessFigureClass.inc
+files[] = classes/ChessFigureControllerClass.inc
+files[] = classes/ChessFigureMetadataControllerClass.inc
+files[] = classes/ChessFigureTypeClass.inc
+files[] = classes/ChessFigureTypeControllerClass.inc
+files[] = classes/ChessFigureTypeMetadataControllerClass.inc
+files[] = classes/ChessFigureTypeUIControllerClass.inc
+files[] = classes/ChessFigureUIControllerClass.inc
+files[] = classes/ChessFigureViewsControllerClass.inc
 
-files[] = includes/classes/ChessFigureType.inc
-files[] = includes/classes/ChessFigureTypeController.inc
-files[] = includes/classes/ChessFigureTypeMetaDataController.inc
-
-files[] = includes/classes/ChessFigureUI.inc
-
-files[] = includes/classes/ChessFigureTypeUI.inc
-
-files[] = includes/classes/ChessFigureViewsController.inc

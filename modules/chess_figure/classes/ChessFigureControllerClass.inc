@@ -4,7 +4,7 @@ class ChessFigureController extends EntityAPIController{
     parent::__construct($type);
   }
 
-  public function create(array $values = array()){
+  public function create(array $values=array()){
     global $user;
     $values += array(
       'fid' => '',
@@ -14,9 +14,7 @@ class ChessFigureController extends EntityAPIController{
       'cell_y' => 0,
       'uid' => $user->uid,
     );
-
-    $chess_figure = parent::create($values);
-
+    $chess_figure = parent:: create($values);
     return $chess_figure;
   }
 }

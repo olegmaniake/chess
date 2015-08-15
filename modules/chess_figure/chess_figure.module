@@ -1,85 +1,75 @@
 <?php
-module_load_include('inc','chess_figure','includes/forms/chess_figure_form');
-module_load_include('inc','chess_figure','includes/forms/chess_figure_type_form');
-
-module_load_include('inc','chess_figure','includes/chess_figure_function');
-
-
+module_load_include('inc', 'chess_figure', 'includes/chess_figure.form');
 /**
- *  Implements hook_entity_info().
+ * Implements hook_entity_info().
  */
-function chess_figure_entity_info() {
+function chess_figure_entity_info(){
   $info['chess_figure'] = array(
-    'label' => t('Chess figure'),
-    'plural label' => t('Chess figures'),
+    'label' => t('Chess Figure'),
+    'plural label' => t('Chess Figure'),
     'entity class' => 'ChessFigure',
     'controller class' => 'ChessFigureController',
     'views controller class' => 'ChessFigureViewsController',
-    'metadata controller class' => 'ChessFigureMetadataController',
+    'metadata controller' => 'ChessFigureMetadataController',
     'base table' => 'chess_figure',
-    'fieldable' => TRUE,
-    'statusKey' => NULL,
+    'fieldable' => FALSE,
     'admin ui' => array(
-      'path' => 'admin/content/chess-figure',
-     // 'file' => 'includes/classes/ClassFigureUI.inc',
+      'path' => 'admin/content/chess-figures',
+      'file' => 'includes/ChessFigureUIControllerClass.inc',
       'controller class' => 'ChessFigureUIController',
-      'menu wildcard' => '%chess_figure',
+      'menu wildcard' => '%figure',
     ),
     'entity keys' => array(
       'id' => 'fid',
       'bundle' => 'type',
     ),
-    'load hook' => 'chess_figure_load',
-    'uri callback' => 'chess_figure_uri',
-    'access callback' => 'chess_figure_access',
-    'module' => 'chess_figure',
+    'bundles' => array(),
     'bundle keys' => array(
       'bundle' => 'type',
     ),
+    'load hook' => 'chess_figure_load',
+    'creation callback' => 'chess_figure_create',
+    'deletion callback' => 'chess_figure_delete',
+    'save callback' => 'chess_figure_save',
+    'uri callback' => 'chess_figure_uri',
+    'access callback' => 'chess_figure_access',
+    'module' => 'chess_figure',
     'view modes' => array(
-      'description' => array(
-        'label' => t('Description'),
-        'custom settings' => TRUE,
+      'figure' => array(
+        'label' => t('Description of figure'),
+        'custom setting' => TRUE,
       ),
       'on_board' => array(
-        'label' => t('On board'),
-        'custom settings' => TRUE,
+        'label' => t('Figures on board'),
+        'custom setting' => TRUE,
       ),
     ),
-    'bundles' => array(),
   );
 
-  $types = db_select('chess_figure_type', 'c')
+  $chess_figure = db_select('chess_figure_type', 'c')
     ->fields('c')
     ->execute()
     ->fetchAllAssoc('type');
 
-  foreach ($types as $type => $info_type_figure) {
+  foreach ($chess_figure as $type => $inf) {
     $info['chess_figure']['bundles'][$type] = array(
-      'label' => $info_type_figure->label, //мітку прсвоемо из бази даних
+      'label' => $inf -> label,
       'admin' => array(
-        'path' => 'admin/structure/chess/figure/type/%chess_figure_type',
-        //шлях за яким буде доступна наша сутність
-        'real path' => 'admin/structure/chess/figure/type/' . $type,
-        // реальний шлях до сутності
+        'path' => 'admin/structure/chess-figure-types/manage/%chess_figure_type',
+        'real path' => 'admin/structure/chess-figure-types/manage/' . $type,
         'bundle argument' => 4,
-        //аргумент в якому передаеться тип сутності
-        'access arguments' => array('administer chess figure'),
-        //аргумент доступу до підтипу
+        'access argument' => array('administer chess figure'),
       ),
-
     );
-  };
+  }
 
   $info['chess_figure_type'] = array(
-    'label' => t('Chess figure type'),
+    'label' => t('Chess Figure Type'),
     'controller class' => 'ChessFigureTypeController',
     'entity class' => 'ChessFigureType',
     'base table' => 'chess_figure_type',
-    'static cache' => FALSE,
-    'field cache' => FALSE,
     'uri callback' => 'chess_figure_type_uri',
-    'fieldable' => TRUE,
+    'fieldable' => FALSE,
     'bundle of' => 'chess_figure',
     'exportable' => FALSE,
     'entity keys' => array(
@@ -90,62 +80,160 @@ function chess_figure_entity_info() {
     'access callback' => 'chess_figure_access',
     'module' => 'chess_figure',
     'admin ui' => array(
-      'path' => 'admin/structure/chess-figure/type',
-
+      'path' => 'admin/structure/chess-figure-types',
       'controller class' => 'ChessFigureTypeUIController',
     ),
-
   );
-
-
-  return $info;
+   return $info;
 }
+
+/**
+ * Implements hook_entity_info_alter().
+ */
 
 
 /**
- *  Implements hook_permission().
+ * Implements hook_permission().
  */
 function chess_figure_permission() {
-  return array(
-    'administer chess figure' => array(
-      'title' => t('administer chess figure'),
-      'description' => t('administer chess figure.'),
-      'restrict access' => FALSE,
+  $permission = array(
+    'administer chess' => array(
+      'title' => t('Administer all chess figure and type'),
+      'description' => t('Create, changed and delete all chess figures and types.'),
+      'restrict access' =>TRUE,
     ),
-    'administer own chess figure' => array(
-      'title' => t('administer own chess figure'),
-      'description' => t('administer own chess figure.'),
+    'own chess' => array(
+      'title' => t('Administer only own chess figure'),
+      'description' => t('Create, changed and delete only own chess figures and types.'),
       'restrict access' => TRUE,
     ),
   );
+  return $permission;
 }
 
 /**
- *  Implements hook_theme().
+ * @param array $values
+ * @return mixed
  */
+function chess_figure_create($values){
+  return entity_get_controller('chess_figure')->create($values);
+}
+
+/**
+ * @param $figures
+ */
+function chess_figure_crete_multiple($figures){
+  foreach ($figures as $figure => $values){
+    chess_figure_create($values);
+  }
+}
+
+function chess_figure_load($chess_figure = NULL, $condition = array(), $reset = FALSE){
+  $ids = is_array($chess_figure) ? $chess_figure : array($chess_figure);
+  return entity_load('chess_figure',$ids,$condition,$reset);
+}
+
+
+function chess_figure_save ($chess_figure){
+  $figure = is_object($chess_figure) ? $chess_figure : chess_figure_load($chess_figure);
+  return $figure ->save();
+}
+
+function chess_figure_save_multiple ($figures){
+  foreach ($figures as $figure){
+    chess_figure_save($figure);
+  }
+}
+
+function chess_figure_delete ($chess_figure){
+  $figure = is_object($chess_figure) ? $chess_figure : chess_figure_load($chess_figure);
+  $figure -> delete;
+}
+
+function chess_figure_delete_multiple ($chess_figures){
+  foreach ($chess_figures as $chess_figure){
+    chess_figure_delete($chess_figure);
+  }
+}
+
+
+function chess_figure_access ($op='create', $chess_figure = NULL, $account = NULL){
+  global $user;
+
+  if (NULL == $account){
+    $account = $user;
+  }
+
+  $id = $account->uid;
+
+  if (user_access('administer chess',$account)){
+    return TRUE;
+  }
+
+  if (user_access('own chess',$account) && $id == $chess_figure -> uid){
+    return TRUE;
+  }
+
+  if ($op == 'create' && $id!=0){
+    return TRUE;
+  }
+
+  return TRUE;
+}
+
+function chess_figure_uri ($chess_figure){
+  $id = is_object($chess_figure) ? $chess_figure->fid : $chess_figure;
+  return array(
+    'path' => 'chess-figure/'.$id,
+  );
+}
+
+function chess_figure_type_uri ($type){
+  $type_name = is_object($type) ? $type -> type : $type;
+  return array(
+    'path' => 'chess-figure-type/' .$type_name,
+  );
+}
+
+function chess_figure_get_types ($type = NULL){
+  $types = entity_load_multiple_by_name('chess_figure_type', isset($type) ? array($type) : FALSE);
+  return isset($type) ? reset($types) : $types;
+}
+
+function chess_figure_set_breadcrumb(){
+  $breadcrumb = array(
+    l(t('Home'), '<front>'),
+    l(t('Administration'), 'admin'),
+    l(t('Content'), 'admin/content'),
+    l(t('Chess-figures'), 'admin/content/chess-figures'),
+  );
+
+  drupal_set_breadcrumb($breadcrumb);
+}
+
+
+
 function chess_figure_theme() {
   return array(
-    'chess-figure' => array(
-      'template' => 'includes/themes/chess-figure',
-      'variables' => array(
-        'cell' => NULL,
-        'color' => NULL,
-        'type' => NULL,
-      ),
-      ),
+    'chess_figure_add_list' => array(
+      'variables' => array('content' => array()),
+      'file' => 'chess_figure.module',
+    ),
+
   );
 }
 
-function chess_figure_on_board($id){
-  $chess_figure = chess_figure_load($id)[$id];
-
-
-  $values = array(
-    'cell' => ('' . $chess_figure->cell_x . $chess_figure->cell_y),
-    'color' => $chess_figure -> color,
-    'type' => $chess_figure -> type,
-  );
-  return theme('chess-figure',$values);
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function chess_figure_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  if ($root_path == 'admin/content/chess-figures') {
+    $item = menu_get_item('admin/content/chess-figures/add');
+    if ($item['access']){
+      $data['actions']['output'][] = array(
+        '#theme' => 'menu_local_action',
+        '#link' => $item,
+      );
+    }
+  }
 }
-
-
