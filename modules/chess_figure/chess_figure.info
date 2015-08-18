@@ -1,6 +1,6 @@
 name = Chess figure
 description = The module that necessary of module chess
-package = GAME
+package = A-GAME
 core = 7.x
 
 dependencies[] = entity

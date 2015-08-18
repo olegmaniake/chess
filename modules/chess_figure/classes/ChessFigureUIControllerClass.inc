@@ -5,6 +5,7 @@ class ChessFigureUIController extends EntityDefaultUIController {
     $id_count = count(explode('/', $this->path));
     $wildcard = isset($this->entityInfo['admin ui']['menu wildcard']) ? $this->entityInfo['admin ui']['menu wildcard'] : '%' . $this->entityType;
 
+
     $items[$this->path . '/add'] = array(
       'title' => 'Add a chess figure',
       'description' => 'Add a new figure',

@@ -1,5 +1,5 @@
 <?php
-module_load_include('inc', 'chess_figure', 'includes/chess_figure.form');
+module_load_include('inc', 'chess_figure', 'includes/chess_figure_type.form');
 /**
  * Implements hook_entity_info().
  */
