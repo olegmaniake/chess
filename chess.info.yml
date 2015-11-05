@@ -1,0 +1,5 @@
+name: Chess Game
+description: Give a chance play and create chess tournament.
+package: Game
+type: module
+core: 8.x
