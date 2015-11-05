@@ -1,0 +1,10 @@
+entity.chess_chess_figure.collection:
+  title: 'Chess: Chess Figure Listing'
+  route_name: entity.chess_chess_figure.collection
+  description: 'List Chess Figure'
+  weigth: 10
+chess_chess_figure.admin.structure.settings:
+  title: Chess Settings
+  description: 'Configure Chess entitys'
+  route_name: chess.setings
+  parent: system.admin_structure

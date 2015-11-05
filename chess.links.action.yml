@@ -1,0 +1,7 @@
+chess.chess_figure_add:
+  route_name: chess.chess_figure_add
+  title: 'Add new Chess Figure'
+
+  appears_on:
+    -entity.chess_chess_figure.collection
+    -entity.chess_chess_figure.canonical

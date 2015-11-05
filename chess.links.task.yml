@@ -1,0 +1,20 @@
+chess.settings_tub:
+  rote_name: chess.settings
+  title: Settings
+  base_route: chess.setings
+
+chess_figure.view:
+  route_name: entity.chess_chess_figure.canonical
+  base_route: entity.chess_chess_figure.canonical
+  title: View
+
+chess_figure.page_edit:
+  route_name: entity.chess_chess_figure.edit_form
+  base_route: entity.chess_chess_figure.canonical
+  title: Edit
+
+chess_figure.delete_confirm:
+  route_name: entity.chess_chess_figure.delete_form
+  base_route: entity.chess_chess_figure.canonical
+  title: Delete
+  weigth: 10

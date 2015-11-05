@@ -1,0 +1,47 @@
+entity.chess_chess_figure.canonical:
+  path: '/chess_figure/{chess-figure}'
+  defaults:
+    _entity_view: 'chess_chess_figure'
+    _title: 'Chess Figure Content'
+  requirements:
+    _entity_access: 'chess_chess_figure.view'
+
+entity.chess_chess_figure.collection:
+  path: '/chess_chess_figure/list'
+  defaults:
+    _entity_list: 'chess_chess_figure'
+    _title: 'Chess Figure List'
+  requirements:
+    _permission: 'view Chess Figure entity'
+
+chess.chess_figure_add:
+  path: '/chess_chess_figure/add'
+  defaults:
+    _entity_form: chess_chess_figure.add
+    _title: 'Add Chess Figure'
+  requirements:
+    _entity_create_access: 'chess_chess_figure'
+
+entity.chess_chess_figure.edit_form:
+  path: '/chess_chess_figure/{chess_chess_figure}/edit'
+  defaults:
+    _entity_form: chess_chess_figure.edit
+    _title: 'Edit Chess Figure'
+  requirements:
+    _entity_access: 'chess_chess_figure.edit'
+
+entity.chess_chess_figure.delete_form:
+  path: '/chess_chess_figure/{chess_chess_figure}/delete'
+  defaults:
+    _entity_form: chess_chess_figure.delete
+    _title: 'Delete Chess Figure'
+  requirements:
+    _entity_access: 'chess_chess_figure.delete'
+
+content_entity_example.contact_settings:
+  path: 'admin/structure/chess_setings'
+  defaults:
+    _form: '\Drupal\chess\Form\ChessSittingsForm'
+    _title: 'Chess Settings'
+  requirements:
+    _permission: 'administer chess entity'

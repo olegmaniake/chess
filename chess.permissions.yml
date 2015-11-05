@@ -1,0 +1,10 @@
+'delete chess entity':
+  title: Delete entity chess.
+'add chess entity':
+  title: Add entity chess
+'view chess entity':
+  title: View entity chess
+'edit chess entity':
+  title: Edit entity chess
+'administer chess entity':
+  title: Administer settings
